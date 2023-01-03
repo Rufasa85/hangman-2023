@@ -5,8 +5,9 @@ var lossesSpan = document.querySelector("#losses-span");
 var resetBtn = document.querySelector("#reset");
 var timeLeftSpan = document.querySelector("#time-left");
 var resultsH2 = document.querySelector("#results")
-
-var wordsArray = ["manatee","chimpanzee","dolphin","gibbon","capybara","panda"]
+var letters = "abcdefghijklmnopqrstuvwxyz";
+var wordsArray = ["manatee","chimpanzee","dolphin","gibbon","capybara","panda","syzygy", "shiva & bahamut, they are so cute!"]
+// var wordsArray = ["shiva & bahamut, they are so cute!"]
 var randomWord;
 var guessedLetters = [];
 var countdownTimer;
@@ -55,10 +56,17 @@ function startGame() {
     // generate a "_" for each char in random word
     guessedLetters=[];
     for (let i = 0; i < randomWord.length; i++) {
-        guessedLetters.push("_")
+        if(letters.includes(randomWord[i])){
+            guessedLetters.push("_")
+        } else if (guessedLetters[i]===" "){
+            guessedLetters.push("&nbsp;")
+        } 
+        else {
+            guessedLetters.push(randomWord[i])
+        }
     }
     console.log(guessedLetters)
-    wordH2.textContent = guessedLetters.join(" ");
+    wordH2.textContent = guessedLetters.join("");
 }
 //  listen for keystrokes
 document.addEventListener("keyup",function(event){
@@ -74,7 +82,7 @@ document.addEventListener("keyup",function(event){
                 guessedLetters[i]=event.key
             }
         }
-        wordH2.textContent = guessedLetters.join(" ");
+        wordH2.textContent = guessedLetters.join("");
         // if all letter guessed, win the game
         if(guessedLetters.join("")===randomWord){
             resultsH2.style.display="block";

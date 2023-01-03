@@ -22,7 +22,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* letter-spacing:15px; */
+    letter-spacing:15px;
 }
 h2 {
     font-size: 4em;
